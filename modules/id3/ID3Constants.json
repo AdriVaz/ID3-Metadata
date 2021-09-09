@@ -1,0 +1,42 @@
+{
+	"HEADER_SIZE": 10,
+	"DEFAULT_PADDING_SIZE": 10,
+    "ID3_DEFAULT_VERSION": 4,
+    "ID3_DEFAULT_REVISION": 0,
+	"HEADER_FLAG_SPEC": {
+		"3": {
+			"UNSYNCHRONIZED":          7,
+			"EXTENDED_HEADER_PRESENT": 6,
+			"EXPERIMENTAL":            5
+		},
+		"4": {
+			"UNSYNCHRONIZED":          7,
+			"EXTENDED_HEADER_PRESENT": 6,
+			"EXPERIMENTAL":            5,
+			"FOOTER_PRESENT":          4
+		}
+	},
+	"EXTENDED_HEADER_V3_SIZE_MARKER_LENGTH": 4,
+	"FOOTER_SIZE": 10,
+	"FRAME_HEADER_SIZE": 10,
+	"FRAME_FLAG_SPEC": {
+		"3": {
+			"TAG_ALTER_PRESERVED":       15,
+			"FILE_ALTER_PRESERVED":      14,
+			"READ_ONLY":                 13,
+			"COMPRESSED":                7,
+			"ENCRYPTED":                 6,
+			"GROUPING_IDENTITY_PRESENT": 5
+		},
+		"4": {
+			"TAG_ALTER_PRESERVED":           15,
+			"FILE_ALTER_PRESERVED":          14,
+			"READ_ONLY":                     13,
+			"GROUPING_IDENTITY_PRESENT":     6,
+			"COMPRESSED":                    3,
+			"ENCRYPTED":                     2,
+			"UNSYNCHRONIZED":                1,
+			"DATA_LENGTH_INDICATOR_PRESENT": 0
+		}
+	}
+}

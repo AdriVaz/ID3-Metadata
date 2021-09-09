@@ -1,0 +1,35 @@
+################################# File Header ##################################
+#   ID3v2 magic number			"ID3"
+#   ID3v2 version				$03 00
+#   ID3v2 flags					%abc0 0000
+#       a - Unsynchronization
+#       b - Extended header
+#       c - Experimental
+#   ID3v2 size				4 * %0xxx xxxx (Synchsafe int)
+#       size = extendedHeader + padding + frames (all after unsynchronisation)
+################################################################################
+
+############################### Extended Header ################################
+#	Extended header size		$xx xx xx xx
+#	Extended flags				%a0000000 00000000
+#		a - CRC data present
+#	Padding size				$xx xx xx xx
+#
+#	Additional data				(Variable length, depending on flags)
+#
+#		- a						$xx xx xx xx
+#								(CRC of all the frames, before unsynching)
+#
+################################################################################
+
+#################################### Frames ####################################
+#	Frame ID					$xx xx xx xx (Four ASCII characters)
+#	Size						$xx xx xx xx
+#	Flags						%abc0 0000 ijk0 0000
+#		a - Tag alter preservation
+#		b - File alter preservation
+#		c - Read only
+#		i - Compression
+#		j - Encryption
+#		k - Grouping identity
+################################################################################

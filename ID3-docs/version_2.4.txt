@@ -1,0 +1,88 @@
+################################# File Header ##################################
+#   ID3v2 magic number			"ID3"
+#   ID3v2 version				$04 00
+#   ID3v2 flags					%abcd 0000
+#       a - Unsynchronization
+#       b - Extended header
+#       c - Experimental
+#		d - Footer present
+#   ID3v2 size				4 * %0xxx xxxx (Synchsafe int)
+#       size = extendedHeader + padding + frames (all after unsynchronisation)
+#		if footer present    -> totalSize - 20 bytes
+#		if no footer present -> totalSize - 10 bytes
+################################################################################
+
+############################### Extended Header ################################
+#	Extended header size	4 * %0xxx xxxx
+#		- Including all fields except this one
+#
+#	Number of flag bytes		$01
+#	Extended flags				%0bcd 0000
+#		b - Tag is an update
+#		c - CRC data present
+#		d - Tag restrictions
+#
+#	Additional data				(Variable length, depending on flags)
+#
+#	b - Tag is an update
+#		Flag data length		$00
+#
+#	c - CRC data present
+#		Flag data length		$05
+#		CRC code			5 * %0xxx xxxx (Synchsafe int)
+#
+#	d - Tag restrictions
+#		Flag data length		$01
+#		Restrictions			%ppqr rstt
+#			pp - Text excoding restrictions
+#				00 -> No more than 128 frames and 1MB   total tag size
+#				01 -> No more than 64  frames and 128KB total tag size
+#				10 -> No more than 32  frames and 40KB  total tag size
+#				11 -> No more than 32  frames and 4kB   total tag size
+#			q - Text encoding restrictions
+#				0  -> No restrictions
+#				1  -> Strings are only [ISO-8859-1] or [UTF-8]
+#			r - Text fields size restrictions
+#				00 -> No restrictions
+#				01 -> No string longer than 1024 characters
+#				10 -> No string longer than 128  characters
+#				11 -> No string longer than 30   characters
+#			s - Image encoding restritions
+#				0  -> No restrictions
+#				1  -> Images are encoded only in PNG or JPEG(JFIF)
+#			t - Image size restrictions
+#				00 -> No restrictions
+#				01 -> All images are 256x256 pixels or smaller
+#				10 -> All images are 64 x 64 pizels or smaller
+#				11 -> All images are 64 x 64 pixels exactly,
+#													unless required otherwise
+################################################################################
+
+################################### Padding ####################################
+#	Padding content			N * $00
+################################################################################
+
+#################################### Footer ####################################
+#	ID3v2 magic					"3DI"
+#	ID3v2 version				$04 00
+#	ID3v2 flags					%abcd 0000
+#	ID3v2 size				4 * $0xxx xxxx
+#
+#	(This is the same as the first header)
+################################################################################
+
+#################################### Frames ####################################
+#	Frame ID					$xx xx xx xx (Four ASCII characters)
+#	Size					4 * %0xxx xxxx
+#		size after compression, encryption and unsynching
+#
+#	Flags						%abc0 0000 0h00 kmnp
+#		a - Tag alter preservation
+#		b - File alter preservation
+#		c - Read only
+#		h - Grouping identity
+#		k - Compression
+#		m - Encryption
+#		n - Unsynchronization
+#		p - Data length indicator
+################################################################################
